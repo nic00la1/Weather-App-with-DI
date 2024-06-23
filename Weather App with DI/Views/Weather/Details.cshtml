@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CityWeather
+
 @{
+    ViewBag.Title = "City Weather";
+
+    if(Model != null)
+    {
+        ViewBag.Title = Model.Name + " | " + ViewBag.Title;
+    }
+}
+
+@if (Model != null)
+{
+    <div class="margin-top-200 margin-left">
+        <div class="flex">
+            @await Component.InvokeAsync("City", new {city = Model})
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="~/">Back to Weather Home Page</a>
+    </div>
+}
+else
+{
+    <h3>City Code is not valid.</h3>
 }

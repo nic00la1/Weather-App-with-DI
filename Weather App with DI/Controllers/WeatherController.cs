@@ -23,6 +23,10 @@ public class WeatherController : Controller
     [Route("/weather/{cityCode?}")]
     public IActionResult Details(string? cityCode)
     {
-        return View();
+        if (string.IsNullOrEmpty(cityCode))
+            return View();
+
+        CityWeather? city = _weatherService.GetWeatherByCityCode(cityCode);
+        return View(city);
     }
 }
