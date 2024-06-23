@@ -1,6 +1,17 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using ServiceContracts;
+using Services;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IWeatherService, WeatherService>();
+
+WebApplication app = builder.Build();
+
+
+app.UseStaticFiles();
+app.UseRouting();
+app.MapControllers();
 
 app.Run();
